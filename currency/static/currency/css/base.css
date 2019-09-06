@@ -1,0 +1,56 @@
+body {
+    width: 100%;
+    height: 100vh;
+    background: violet;
+
+}
+
+.container {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+
+.box-shadow {
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+
+.btn {
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    padding: 10px 30px 10px 30px;
+    margin: 7px;
+}
+
+.card-body {
+    margin: auto;
+    justify-content: center;
+    text-align: center;
+    height: 100px;
+}
+
+@media (min-width: 481px) {
+
+    .card {
+        max-width: 1000px;
+        min-width: 700px;
+
+    }
+}
+
+
+@media (max-width: 480px) {
+
+    .card {
+        max-width: 1000px;
+
+    }
+
+}
+
+.card-header {
+
+    background-color: rgba(144, 123, 73, 0.23);
+}

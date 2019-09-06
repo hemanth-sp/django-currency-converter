@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static 'currency/css/base.css'%}">
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <title>Currency Converter</title>
+</head>
+
+<body class="d-flex m-auto justify-content-center"
+    style="background: url('{% static 'currency/images/img.jpeg' %}') 50% fixed; background-size: cover;">
+    <section>
+        <div class="container">
+
+
+            <div class="row">
+                <div class="card box-shadow m-2">
+                    <div class="card-header text-center">
+                        <h4>Currency converter preview </h4>
+                    </div>
+
+                    <form id="form" class="p-3" action="." method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-row">
+                            <div class="form-group col-md-4 mb-0">
+                                {{ currency_form.source_currency_value|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-4 mb-0">
+                                {{ currency_form.source_currency_code|as_crispy_field }}
+                            </div>
+                            <div class="form-group col-md-4 mb-0">
+                                {{ currency_form.target_currency_code|as_crispy_field }}
+                            </div>
+                        </div>
+                        {% if converted_currency %}
+                        <div class="card col-6 p-0 m-auto">
+                            <div class="card-header text-center">
+                                <h5>Converted amount</h4>
+                                    <h5>from <b>{{currency_form.source_currency_code.value}}</b> to
+                                        <b>{{currency_form.target_currency_code.value}}</b></h5>
+                            </div>
+                            <div class="card-body">
+                                {{converted_currency}}
+                            </div>
+
+                        </div>
+                        {% endif %}
+
+
+
+                        <hr class="hr-line-dashed">
+                        <div class="form-footer text-center">
+                            <input id="submit" type="submit" class="btn btn-primary" value="Convert" />
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+
+
+</body>
+<script>
+    $(document).ready(function () {
+        $("#submit").click(function () {
+            if($('#id_source_currency_value').val()){
+                $('#submit').attr('value', 'Converting...');
+
+            }
+        });
+    });
+</script>
+
+</html>
